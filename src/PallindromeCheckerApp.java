@@ -4,25 +4,22 @@ public class PallindromeCheckerApp {
 
         String original = "madam";
 
-        // Create a Queue (FIFO) and a Stack (LIFO)
-        java.util.Queue<Character> queue = new java.util.LinkedList<>();
-        java.util.Stack<Character> stack = new java.util.Stack<>();
+        // Create a Deque
+        java.util.Deque<Character> deque = new java.util.ArrayDeque<>();
 
-        // Enqueue into queue and push into stack
+        // Insert all characters into the deque
         for (int i = 0; i < original.length(); i++) {
-            char ch = original.charAt(i);
-            queue.add(ch);   // enqueue
-            stack.push(ch);  // push
+            deque.addLast(original.charAt(i));
         }
 
         boolean isPalindrome = true;
 
-        // Compare dequeue vs pop
-        while (!queue.isEmpty()) {
-            char fromQueue = queue.remove(); // dequeue
-            char fromStack = stack.pop();    // pop
+        // Compare front and rear until deque is empty or mismatch found
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
 
-            if (fromQueue != fromStack) {
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
@@ -30,9 +27,9 @@ public class PallindromeCheckerApp {
 
         // Display result
         if (isPalindrome) {
-            System.out.println("The given string \"" + original + "\" is a Palindrome (Queue + Stack check).");
+            System.out.println("The given string \"" + original + "\" is a Palindrome (Deque check).");
         } else {
-            System.out.println("The given string \"" + original + "\" is NOT a Palindrome (Queue + Stack check).");
+            System.out.println("The given string \"" + original + "\" is NOT a Palindrome (Deque check).");
         }
     }
 
