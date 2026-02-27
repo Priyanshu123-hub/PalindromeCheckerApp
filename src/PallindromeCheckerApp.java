@@ -2,31 +2,39 @@
 public class PallindromeCheckerApp {
     public static void main(String[] args) {
 
-        // Hardcoded string
         String original = "madam";
 
-        // Create a stack
+        // Create a Queue (FIFO) and a Stack (LIFO)
+        java.util.Queue<Character> queue = new java.util.LinkedList<>();
         java.util.Stack<Character> stack = new java.util.Stack<>();
 
-        // Push all characters into the stack
+        // Enqueue into queue and push into stack
         for (int i = 0; i < original.length(); i++) {
-            stack.push(original.charAt(i));
+            char ch = original.charAt(i);
+            queue.add(ch);   // enqueue
+            stack.push(ch);  // push
         }
 
-        // Pop characters to build reversed string
-        String reversed = "";
-        while (!stack.isEmpty()) {
-            reversed += stack.pop();
+        boolean isPalindrome = true;
+
+        // Compare dequeue vs pop
+        while (!queue.isEmpty()) {
+            char fromQueue = queue.remove(); // dequeue
+            char fromStack = stack.pop();    // pop
+
+            if (fromQueue != fromStack) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        // Compare original and reversed
-        if (original.equals(reversed)) {
-            System.out.println("The given string \"" + original + "\" is a Palindrome.");
+        // Display result
+        if (isPalindrome) {
+            System.out.println("The given string \"" + original + "\" is a Palindrome (Queue + Stack check).");
         } else {
-            System.out.println("The given string \"" + original + "\" is NOT a Palindrome.");
+            System.out.println("The given string \"" + original + "\" is NOT a Palindrome (Queue + Stack check).");
         }
     }
-
 
 
 
