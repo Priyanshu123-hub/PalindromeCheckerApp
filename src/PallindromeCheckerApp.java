@@ -1,38 +1,35 @@
+import java.util.LinkedList;
 
 public class PallindromeCheckerApp {
     public static void main(String[] args) {
 
-        String original = "madam";
+        // Define the input string
+        String input = "level";
 
-        // Create a Deque
-        java.util.Deque<Character> deque = new java.util.ArrayDeque<>();
+        // Create a LinkedList to store characters
+        LinkedList<Character> list = new LinkedList<>();
 
-        // Insert all characters into the deque
-        for (int i = 0; i < original.length(); i++) {
-            deque.addLast(original.charAt(i));
+        // Add each character to the linked list
+        for (char c : input.toCharArray()) {
+            list.add(c);
         }
 
+        // Flag to track palindrome state
         boolean isPalindrome = true;
 
-        // Compare front and rear until deque is empty or mismatch found
-        while (deque.size() > 1) {
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
+        // Compare until only one or zero elements remain
+        while (list.size() > 1) {
 
-            if (front != rear) {
+            char first = list.removeFirst();
+            char last = list.removeLast();
+
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Display result
-        if (isPalindrome) {
-            System.out.println("The given string \"" + original + "\" is a Palindrome (Deque check).");
-        } else {
-            System.out.println("The given string \"" + original + "\" is NOT a Palindrome (Deque check).");
-        }
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
-
-
-
 }
